@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
+import 'package:oneminute/core/constants/image_constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,20 +24,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    start();
+    //start();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
+      backgroundColor: AppColors.background,
       body: Center(
-        child: Text(
-          "One Minute",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 32,
-            color: AppColors.primaryText,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 150, width: 150, child: Image.asset(
+              ImageConstants.icon),),
+            Text(
+              "One Minute",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 32,
+                color: AppColors.primaryText,
+              ),
+            ),
+          ],
         ),
       ),
     );
