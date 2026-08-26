@@ -24,14 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    //start();
+    start();
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Center(
         child: Column(
+          spacing: 10,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 150, width: 150, child: Image.asset(
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 32,
-                color: AppColors.primaryText,
+                color: AppColors.primary,
               ),
             ),
           ],

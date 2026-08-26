@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
-import 'package:oneminute/features/home/home.dart';
+import 'package:oneminute/features/home/presentation/home.dart';
+import 'package:oneminute/features/home/presentation/summary.dart';
+import 'package:oneminute/features/home/presentation/writing.dart';
+import 'package:oneminute/features/navigation/presentation/app_navigation.dart';
 import 'package:oneminute/features/onboarding/presentation/onboarding.dart';
 import 'package:oneminute/features/splash/presentation/splash.dart';
 
@@ -21,11 +24,30 @@ final router = GoRouter(
       name: 'Onboarding',
       builder: (context, state) => OnboardingScreen(),
     ),
-        GoRoute(
+    GoRoute(
       path: RouteConstants.home,
       name: 'Home',
+      routes: [
+        GoRoute(path: RouteConstants.writing,
+        name: "/home/writing",
+        builder: (context, state) => WritingScreen(),
+        )
+      ],
       builder: (context, state) => HomeScreen(),
     ),
+    GoRoute(
+      path: RouteConstants.navigation,
+      name: 'navigation',
+      builder: (context, state) => AppNavigationBar(),
+    ),
+    GoRoute(
+      path: RouteConstants.summary,
+      name: '/home/summary',
+      builder: (context, state) => SummaryScreen(
+        wordCount: state.extra as int,
+      ),
+    ),
+
   ],
 );
 

@@ -85,7 +85,7 @@ class OnboardingPage extends StatelessWidget {
                   onPressed: !state.endOfPage ? () {
                    state.nextPage();
                   } : () {
-                    context.go(RouteConstants.home);
+                    context.go(RouteConstants.navigation);
                   },
                   label: Text(
                     state.endOfPage ? "Get Started" : "Next",

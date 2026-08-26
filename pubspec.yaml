@@ -37,6 +37,8 @@ dependencies:
   go_router: ^17.2.3
   provider: ^6.1.5+1
   flutter_riverpod: ^3.3.2
+  flutter_material_design_icons: ^3.1.0+7447
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   flutter_test:
