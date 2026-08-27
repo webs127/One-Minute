@@ -12,6 +12,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  static const List<String> _weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
+  static const List<String> _months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  String get _formattedDate {
+    final now = DateTime.now();
+    return '${_weekdays[now.weekday - 1]}, ${now.day} ${_months[now.month - 1]}';
+  }
+
+  String get _greeting {
+    final hour = DateTime.now().hour;
+    if (hour < 12) return 'Good Morning';
+    if (hour < 17) return 'Good Afternoon';
+    return 'Good Evening';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -23,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz)),
+                IconButton(onPressed: () {}, icon: Icon(MdiIcons.menu)),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.notifications_outlined),
@@ -31,12 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Text(
-              "Good Morning,",
+              "$_greeting,",
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 5),
             Text(
-              "Aarav",
+              "Divine",
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -45,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 10),
             Text(
-              "Tuesday, 24 August",
+              _formattedDate,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,

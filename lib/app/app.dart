@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oneminute/app/router/app_router.dart';
 import 'package:oneminute/app/theme/app_theme.dart';
+import 'package:oneminute/providers/journal_provider.dart';
 import 'package:oneminute/providers/navigation_provider.dart';
 import 'package:oneminute/providers/onboarding_provider.dart';
 import 'package:oneminute/providers/writing_provider.dart';
@@ -15,6 +16,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => OnboardingViewModel()),
         ChangeNotifierProvider(create: (_) => NavigationViewModel()),
         ChangeNotifierProvider(create: (_) => WritingProvider()),
+        //Provider(create: (_) => WritingProvider()),
+        ChangeNotifierProxyProvider<WritingProvider, JournalProvider>(
+          create: (context) =>
+              JournalProvider(writingProvider: context.read<WritingProvider>()),
+          update: (_, writingProvider, _) =>
+              JournalProvider(writingProvider: writingProvider),
+        ),
       ],
       child: MaterialApp.router(
         title: 'One Minute',

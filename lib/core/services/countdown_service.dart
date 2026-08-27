@@ -21,7 +21,7 @@ class TaskState {
 class CountdownService {
   StreamController<TaskState> controller = StreamController.broadcast();
   Stream<TaskState> get stream => controller.stream;
-  int initialCount = 15;
+  int initialCount = 60;
   late TaskState lastState;
   Timer? timer;
   bool _closed = false;

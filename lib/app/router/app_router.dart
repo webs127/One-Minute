@@ -4,6 +4,8 @@ import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/home/presentation/summary.dart';
 import 'package:oneminute/features/home/presentation/writing.dart';
+import 'package:oneminute/features/journal/presentation/entry_detail.dart';
+import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/navigation/presentation/app_navigation.dart';
 import 'package:oneminute/features/onboarding/presentation/onboarding.dart';
 import 'package:oneminute/features/splash/presentation/splash.dart';
@@ -47,7 +49,19 @@ final router = GoRouter(
         wordCount: state.extra as int,
       ),
     ),
-
+    GoRoute(
+      path: RouteConstants.journal,
+      name: 'Journal',
+      routes: [
+        GoRoute(path: RouteConstants.entryDetail,
+        name: "/journal/entryDetail",
+        builder: (context, state) => EntryDetailScreen(
+          content: state.extra as String,
+        ),
+        )
+      ],
+      builder: (context, state) => JournalScreen(),
+    ),
   ],
 );
 

@@ -65,5 +65,10 @@ class WritingProvider with ChangeNotifier {
   resume() => _countdownService.resume();
   dispose() => _countdownService.dispose();
 
-  bool get isDone => _countdownService.isDone();
+  bool get isDone => _countdownService.isDone(); 
+  
+  addJournal(String value) {
+    journals.add(value);
+    notifyListeners();
+  }
 }
