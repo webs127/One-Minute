@@ -32,6 +32,7 @@ class _WritingScreenState extends State<WritingScreen> {
       if (state.isFinished && mounted) {
         final count = _provider.wordCount;
         _provider.clearDraft();
+        _provider.addJournal(_textController.text);
         context.pushNamed(RouteConstants.summary, extra: count);
       }
     });

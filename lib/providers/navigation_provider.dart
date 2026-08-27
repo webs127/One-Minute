@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
+import 'package:oneminute/features/journal/presentation/journal.dart';
 
 class NavigationViewModel with ChangeNotifier{
   final List<NavigationObj> tabs = [
@@ -11,7 +12,7 @@ class NavigationViewModel with ChangeNotifier{
 
   final List<Widget> _views = [
     HomeScreen(),
-    Center(child: Text("Journal")),
+    Center(child: JournalScreen()),
     Center(child: Text("Calendar")),
     Center(child: Text("Settings")),
   ];
