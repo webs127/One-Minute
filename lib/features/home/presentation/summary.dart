@@ -15,6 +15,7 @@ class SummaryScreen extends StatefulWidget {
 class _SummaryScreenState extends State<SummaryScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -29,15 +30,17 @@ class _SummaryScreenState extends State<SummaryScreen> {
                 CircleAvatar(
                   radius: 70,
                   backgroundColor: AppColors.primaryContainer,
-                  child: Icon(MdiIcons.checkboxMarkedCircleOutline, color: AppColors.primary, size: 40),
+                  child: Icon(
+                    MdiIcons.checkboxMarkedCircleOutline,
+                    color: AppColors.primary,
+                    size: 40,
+                  ),
                 ),
                 SizedBox(height: 20),
                 Text(
                   "That's your minute!",
-                  style: TextStyle(
-                    fontSize: 28,
+                  style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: AppColors.surfaceBlack,
                   ),
                 ),
                 SizedBox(height: 5),
@@ -52,12 +55,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                 ),
                 SizedBox(height: 30),
                 Card.outlined(
-                  shape: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.border),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
                   elevation: 1,
-                  color: AppColors.background,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
@@ -89,7 +87,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   padding: EdgeInsets.all(16),
                   shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
-                    borderSide: BorderSide.none
+                    borderSide: BorderSide.none,
                   ),
                   color: AppColors.primary,
                   minWidth: size.width,
@@ -110,15 +108,14 @@ class _SummaryScreenState extends State<SummaryScreen> {
                   padding: EdgeInsets.all(16),
                   shape: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24),
-                    borderSide: BorderSide(color: AppColors.border)
+                    borderSide: BorderSide(color: AppColors.border),
                   ),
                   minWidth: size.width,
                   child: Text(
                     "Back to Home",
-                    style: TextStyle(
+                    style: theme.textTheme.titleMedium?.copyWith(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.surfaceBlack,
                     ),
                   ),
                 ),
@@ -144,6 +141,7 @@ class SummaryCardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       spacing: 10,
       children: [
@@ -154,10 +152,9 @@ class SummaryCardTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: TextStyle(
+              style: theme.textTheme.titleMedium?.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: AppColors.surfaceBlack,
               ),
             ),
             Text(

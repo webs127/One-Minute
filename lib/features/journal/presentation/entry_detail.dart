@@ -6,20 +6,25 @@ class EntryDetailScreen extends StatelessWidget {
   final String content;
   const EntryDetailScreen({super.key, required this.content});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: AppColors.background,
             centerTitle: true,
             title: Text(
               "August 27, 2026",
-              style: TextStyle(fontWeight: FontWeight.w600),
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(MdiIcons.delete,color: Colors.red,))
+              IconButton(
+                onPressed: () {},
+                icon: Icon(MdiIcons.delete, color: Colors.red),
+              ),
             ],
           ),
           SliverToBoxAdapter(
@@ -38,11 +43,6 @@ class EntryDetailScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Card.outlined(
-                    color: AppColors.surfaceWhite,
-                    shape: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.border),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
@@ -50,10 +50,7 @@ class EntryDetailScreen extends StatelessWidget {
                           Flexible(
                             child: Text(
                               content,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              style: theme.textTheme.titleMedium,
                             ),
                           ),
                         ],
@@ -66,10 +63,10 @@ class EntryDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomSheet: Container(
+      bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: AppColors.border, width: 2)),
-          color: AppColors.background,
+          //color: AppColors.background,
         ),
         padding: EdgeInsets.all(16),
         child: Row(
@@ -78,7 +75,7 @@ class EntryDetailScreen extends StatelessWidget {
             Row(
               spacing: 10,
               children: [
-                Icon(MdiIcons.clockTimeThreeOutline, color: AppColors.primary,),
+                Icon(MdiIcons.clockTimeThreeOutline, color: AppColors.primary),
                 Text(
                   "01:00 Time spent",
                   style: TextStyle(

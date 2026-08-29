@@ -9,6 +9,7 @@ class EmptyJournalState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final theme = Theme.of(context);
     return SliverToBoxAdapter(
       child: Center(
         child: Padding(
@@ -25,13 +26,17 @@ class EmptyJournalState extends StatelessWidget {
               Text(
                 "Your story starts with one minute",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+                style: theme.textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               SizedBox(height: 10),
               Text(
                 "Your jounal entries will appear here after you capture your first moment.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w400
+                ),
               ),
               SizedBox(height: 20),
               MaterialButton(

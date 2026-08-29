@@ -18,6 +18,7 @@ class AppProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme= Theme.of(context);
     return Center(
       child: SizedBox(
         width: size?.width ?? 180,
@@ -40,11 +41,7 @@ class AppProgressIndicator extends StatelessWidget {
                 children: [
                   Text(
                     value ?? "01:00",
-                    style: TextStyle(
-                      fontSize: fontSize ?? 42,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.surfaceBlack,
-                    ),
+                    style: theme.textTheme.displayMedium,
                   ),
                   text == null
                       ? SizedBox()

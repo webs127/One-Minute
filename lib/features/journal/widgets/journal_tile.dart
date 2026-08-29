@@ -14,14 +14,10 @@ class JournalTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
       child: Card.outlined(
-        shape: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: AppColors.border),
-        ),
-        color: AppColors.surfaceWhite,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: onTap,
@@ -48,11 +44,7 @@ class JournalTile extends StatelessWidget {
                         content,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: AppColors.primaryText,
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: theme.textTheme.titleMedium,
                       ),
                     ],
                   ),

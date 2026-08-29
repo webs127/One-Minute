@@ -51,6 +51,7 @@ class _WritingScreenState extends State<WritingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -120,7 +121,7 @@ class _WritingScreenState extends State<WritingScreen> {
                 builder: (context, provider, __) {
                   return Text(
                     provider.currentPrompt,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: theme.textTheme.headlineSmall,
                   );
                 },
               ),
@@ -131,13 +132,15 @@ class _WritingScreenState extends State<WritingScreen> {
                     context.read<WritingProvider>().updateWordCount(text),
                 maxLines: 10,
                 minLines: 1,
-                style: TextStyle(fontWeight: FontWeight.w500),
+                style: theme.textTheme.titleMedium,
                 cursorColor: AppColors.primary,
                 decoration: InputDecoration(
                   fillColor: AppColors.primaryContainer.withValues(alpha: .1),
                   filled: true,
                   hintText: "Today i woke up happy...",
-                  hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                  hintStyle: theme.textTheme.titleMedium?.copyWith(
+                    fontStyle: FontStyle.italic,
+                  ),
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: AppColors.border),
                     borderRadius: BorderRadius.circular(12),
@@ -157,6 +160,7 @@ class _WritingScreenState extends State<WritingScreen> {
                 builder: (context, provider, __) {
                   return Text(
                     "${provider.wordCount} ${provider.wordCount == 1 ? 'word' : 'words'}",
+                    style: theme.textTheme.titleMedium?.copyWith(fontSize: 14),
                   );
                 },
               ),
