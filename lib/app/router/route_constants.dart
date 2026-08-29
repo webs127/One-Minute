@@ -7,5 +7,6 @@ class RouteConstants {
   static const String summary = "/home/summary";
   static const String journal = "/journal";
   static const String settings = "/settings";
+  static const String about = "/settings/about";
   static const String entryDetail = "/journal/entryDetail";
 }
