@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
+import 'package:oneminute/app/router/transitions.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/home/presentation/summary.dart';
 import 'package:oneminute/features/home/presentation/writing.dart';
@@ -8,6 +9,7 @@ import 'package:oneminute/features/journal/presentation/entry_detail.dart';
 import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/navigation/presentation/app_navigation.dart';
 import 'package:oneminute/features/onboarding/presentation/onboarding.dart';
+import 'package:oneminute/features/settings/presentation/about.dart';
 import 'package:oneminute/features/settings/settings.dart';
 import 'package:oneminute/features/splash/presentation/splash.dart';
 
@@ -31,10 +33,11 @@ final router = GoRouter(
       path: RouteConstants.home,
       name: 'Home',
       routes: [
-        GoRoute(path: RouteConstants.writing,
-        name: "/home/writing",
-        builder: (context, state) => WritingScreen(),
-        )
+        GoRoute(
+          path: RouteConstants.writing,
+          name: "/home/writing",
+          builder: (context, state) => WritingScreen(),
+        ),
       ],
       builder: (context, state) => HomeScreen(),
     ),
@@ -46,28 +49,37 @@ final router = GoRouter(
     GoRoute(
       path: RouteConstants.summary,
       name: '/home/summary',
-      builder: (context, state) => SummaryScreen(
-        wordCount: state.extra as int,
-      ),
+      builder: (context, state) => SummaryScreen(wordCount: state.extra as int),
     ),
     GoRoute(
       path: RouteConstants.journal,
       name: 'Journal',
       routes: [
-        GoRoute(path: RouteConstants.entryDetail,
-        name: "/journal/entryDetail",
-        builder: (context, state) => EntryDetailScreen(
-          content: state.extra as String,
+        GoRoute(
+          path: RouteConstants.entryDetail,
+          name: "/journal/entryDetail",
+          builder: (context, state) =>
+              EntryDetailScreen(content: state.extra as String),
         ),
-        )
       ],
       builder: (context, state) => JournalScreen(),
     ),
-        GoRoute(
+    GoRoute(
       path: RouteConstants.settings,
       name: 'Settings',
       builder: (context, state) => SettingsScreen(),
+      routes: [
+            GoRoute(
+      path: RouteConstants.about,
+      name: '/settings/about',
+      pageBuilder: (context, state) => CustomTransitionPage(
+        key: state.pageKey,
+        transitionsBuilder: AppTransitions.slideUp,
+        child: AboutScreen()),
     ),
+      ]
+    ),
+
   ],
 );
 

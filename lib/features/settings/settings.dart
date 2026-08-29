@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
+import 'package:go_router/go_router.dart';
+import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 44, left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -91,6 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 tiles: [
                   SettingsCardObj(
                     title: "About One Minute",
+                    onTap: () => context.pushNamed(RouteConstants.about),
                     icon: Icons.info_outline,
                   ),
                   SettingsCardObj(
