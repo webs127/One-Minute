@@ -14,11 +14,9 @@ When the timer ends, the entry is automatically saved, creating a simple daily h
 
 ## 📱 Screenshots
 
-> Screenshots will be added as development progresses.
-
 | Home           | Writing        | Journal        | Settings       |
 | -------------- | -------------- | -------------- | -------------- |
-| Add screenshot | Add screenshot | Add screenshot | Add screenshot |
+| ![Home](assets/screenshots/home.jpg) | ![Home](assets/screenshots/writing.jpg) | ![Home](assets/screenshots/journal.jpg) | ![Home](assets/screenshots/settings.jpg) |
 
 ---
 
