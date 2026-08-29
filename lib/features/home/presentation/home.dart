@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
@@ -68,34 +69,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               "$_greeting,",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
+              style: theme.textTheme.headlineLarge,
             ),
             SizedBox(height: 5),
             Text(
               "Divine",
-              style: TextStyle(
+              style: theme.textTheme.headlineLarge?.copyWith(
                 fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: AppColors.primaryText,
+                fontWeight: FontWeight.bold
               ),
             ),
             SizedBox(height: 10),
             Text(
               _formattedDate,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: AppColors.secondaryText,
-              ),
+              style: theme.textTheme.titleMedium?.copyWith(
+              )
             ),
             SizedBox(height: 30),
             Card.outlined(
               elevation: 0.5,
-              shape: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColors.border),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              color: AppColors.background,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -191,11 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Card.outlined(
                     elevation: .5,
-                    shape: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.border),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: AppColors.background,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
@@ -236,11 +223,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Card.outlined(
                     elevation: .5,
-                    shape: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.border),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    color: AppColors.background,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(

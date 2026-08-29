@@ -8,6 +8,7 @@ import 'package:oneminute/features/journal/presentation/entry_detail.dart';
 import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/navigation/presentation/app_navigation.dart';
 import 'package:oneminute/features/onboarding/presentation/onboarding.dart';
+import 'package:oneminute/features/settings/settings.dart';
 import 'package:oneminute/features/splash/presentation/splash.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -61,6 +62,11 @@ final router = GoRouter(
         )
       ],
       builder: (context, state) => JournalScreen(),
+    ),
+        GoRoute(
+      path: RouteConstants.settings,
+      name: 'Settings',
+      builder: (context, state) => SettingsScreen(),
     ),
   ],
 );

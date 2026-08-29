@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
-import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/features/journal/widgets/app_tabbar.dart';
 import 'package:oneminute/features/journal/widgets/empty_journal_state.dart';
 import 'package:oneminute/features/journal/widgets/journal_calendar.dart';
@@ -19,12 +18,12 @@ class _JournalScreenState extends State<JournalScreen> {
   final List<String> tabs = ["Entries", "Calendar"];
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             toolbarHeight: 140,
-            backgroundColor: AppColors.background,
             pinned: true,
             floating: true,
             title: Column(
@@ -33,10 +32,9 @@ class _JournalScreenState extends State<JournalScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Your Jounal",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
+                      "Your Journal",
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.w600
                       ),
                     ),
                     IconButton(
