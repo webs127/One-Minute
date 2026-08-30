@@ -16,17 +16,26 @@ class JournalAdapter extends TypeAdapter<Journal> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Journal(content: fields[0] as String, date: fields[1] as String);
+    return Journal(
+      content: fields[0] as String,
+      date: fields[1] as String,
+      wordcount: (fields[2] as num).toInt(),
+      timestamp: fields[3] as DateTime,
+    );
   }
 
   @override
   void write(BinaryWriter writer, Journal obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.content)
       ..writeByte(1)
-      ..write(obj.date);
+      ..write(obj.date)
+      ..writeByte(2)
+      ..write(obj.wordcount)
+      ..writeByte(3)
+      ..write(obj.timestamp);
   }
 
   @override

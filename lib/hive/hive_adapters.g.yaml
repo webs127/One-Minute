@@ -5,9 +5,13 @@ nextTypeId: 1
 types:
   Journal:
     typeId: 0
-    nextIndex: 2
+    nextIndex: 4
     fields:
       content:
         index: 0
       date:
         index: 1
+      wordcount:
+        index: 2
+      timestamp:
+        index: 3

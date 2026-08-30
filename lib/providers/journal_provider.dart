@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oneminute/models/journal.dart';
 import 'package:oneminute/providers/writing_provider.dart';
 
 class JournalProvider with ChangeNotifier{
@@ -12,7 +13,7 @@ class JournalProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  List<String> get journals => writingProvider.journals;
+  List<Journal> get journals => writingProvider.journals;
 
   bool get isEmpty => writingProvider.journals.isEmpty;
 }

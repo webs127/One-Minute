@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_ce/hive_ce.dart';
 import 'package:oneminute/app/router/app_router.dart';
+import 'package:oneminute/models/journal.dart';
 import 'package:oneminute/providers/journal_provider.dart';
 import 'package:oneminute/providers/navigation_provider.dart';
 import 'package:oneminute/providers/onboarding_provider.dart';
@@ -8,14 +10,16 @@ import 'package:oneminute/providers/writing_provider.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Box<Journal> journalsBox;
+  const MyApp({super.key, required this.journalsBox});
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => OnboardingViewModel()),
         ChangeNotifierProvider(create: (_) => NavigationViewModel()),
-        ChangeNotifierProvider(create: (_) => WritingProvider()),
+        ChangeNotifierProvider(
+            create: (_) => WritingProvider(box: journalsBox)),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         //Provider(create: (_) => WritingProvider()),
         ChangeNotifierProxyProvider<WritingProvider, JournalProvider>(
