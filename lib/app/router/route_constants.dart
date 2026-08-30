@@ -8,5 +8,6 @@ class RouteConstants {
   static const String journal = "/journal";
   static const String settings = "/settings";
   static const String about = "/settings/about";
+  static const String reminder = "/settings/reminder";
   static const String entryDetail = "/journal/entryDetail";
 }

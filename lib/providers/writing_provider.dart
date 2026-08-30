@@ -71,4 +71,6 @@ class WritingProvider with ChangeNotifier {
     journals.add(value);
     notifyListeners();
   }
+
+  int get journalLength => journals.length;
 }

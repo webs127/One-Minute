@@ -3,6 +3,9 @@ import 'package:flutter_material_design_icons/flutter_material_design_icons.dart
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/features/home/widgets/progress_indicator.dart';
 import 'package:oneminute/features/home/widgets/start_button.dart';
+import 'package:oneminute/providers/navigation_provider.dart';
+import 'package:oneminute/providers/writing_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,23 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            Text(
-              "$_greeting,",
-              style: theme.textTheme.headlineLarge,
-            ),
+            Text("$_greeting,", style: theme.textTheme.headlineLarge),
             SizedBox(height: 5),
             Text(
               "Divine",
               style: theme.textTheme.headlineLarge?.copyWith(
                 fontSize: 32,
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10),
             Text(
               _formattedDate,
-              style: theme.textTheme.titleMedium?.copyWith(
-              )
+              style: theme.textTheme.titleMedium?.copyWith(),
             ),
             SizedBox(height: 30),
             Card.outlined(
@@ -183,39 +182,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Card.outlined(
                     elevation: .5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 10,
-                        children: [
-                          Icon(
-                            MdiIcons.fire,
-                            color: Colors.redAccent,
-                            size: 35,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                  color: AppColors.surfaceBlack,
+                    child: InkWell(
+                      onTap: () =>
+                          context.read<NavigationViewModel>().onTabChanged(2),
+                          borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 10,
+                          children: [
+                            Icon(
+                              MdiIcons.fire,
+                              color: Colors.orange,
+                              size: 35,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "0",
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Day Streak",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.secondaryText,
+                                Text(
+                                  "Day Streak",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.secondaryText,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -223,39 +226,46 @@ class _HomeScreenState extends State<HomeScreen> {
                 Expanded(
                   child: Card.outlined(
                     elevation: .5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 10,
-                        children: [
-                          Icon(
-                            Icons.task,
-                            color: AppColors.primary.withValues(alpha: .5),
-                            size: 35,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w900,
-                                  color: AppColors.surfaceBlack,
+                    child: InkWell(
+                      onTap: () =>
+                          context.read<NavigationViewModel>().onTabChanged(1),
+                      borderRadius: BorderRadius.circular(12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          spacing: 10,
+                          children: [
+                            Icon(
+                              Icons.task,
+                              color: AppColors.primary.withValues(alpha: .5),
+                              size: 35,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context
+                                      .watch<WritingProvider>()
+                                      .journalLength
+                                      .toString(),
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "Total Entries",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.secondaryText,
+                                Text(
+                                  "Total Entries",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.secondaryText,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
