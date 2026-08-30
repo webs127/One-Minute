@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
+import 'package:oneminute/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class StartButton extends StatelessWidget {
   const StartButton({super.key});
@@ -14,9 +16,9 @@ class StartButton extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: AppColors.background,
+              color: context.watch<ThemeProvider>().isLight ? AppColors.background : AppColors.darkborder,
               blurRadius: 20,
-              spreadRadius: 20,
+              spreadRadius: context.watch<ThemeProvider>().isLight ? 20 : 10,
             ),
           ],
           color: AppColors.primary,

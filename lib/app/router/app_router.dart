@@ -10,7 +10,8 @@ import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/navigation/presentation/app_navigation.dart';
 import 'package:oneminute/features/onboarding/presentation/onboarding.dart';
 import 'package:oneminute/features/settings/presentation/about.dart';
-import 'package:oneminute/features/settings/settings.dart';
+import 'package:oneminute/features/settings/presentation/reminder_setup.dart';
+import 'package:oneminute/features/settings/presentation/settings.dart';
 import 'package:oneminute/features/splash/presentation/splash.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -69,17 +70,26 @@ final router = GoRouter(
       name: 'Settings',
       builder: (context, state) => SettingsScreen(),
       routes: [
-            GoRoute(
-      path: RouteConstants.about,
-      name: '/settings/about',
-      pageBuilder: (context, state) => CustomTransitionPage(
-        key: state.pageKey,
-        transitionsBuilder: AppTransitions.slideUp,
-        child: AboutScreen()),
+        GoRoute(
+          path: RouteConstants.about,
+          name: '/settings/about',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            transitionsBuilder: AppTransitions.slideUp,
+            child: AboutScreen(),
+          ),
+        ),
+        GoRoute(
+          path: RouteConstants.reminder,
+          name: '/settings/reminder',
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            transitionsBuilder: AppTransitions.slideUp,
+            child: ReminderSetup(),
+          ),
+        ),
+      ],
     ),
-      ]
-    ),
-
   ],
 );
 

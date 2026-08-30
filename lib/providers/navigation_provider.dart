@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/journal/presentation/journal.dart';
-import 'package:oneminute/features/settings/settings.dart';
+import 'package:oneminute/features/settings/presentation/settings.dart';
+import 'package:oneminute/models/navigation.dart';
 
 class NavigationViewModel with ChangeNotifier{
   final List<NavigationObj> tabs = [
@@ -26,11 +27,4 @@ class NavigationViewModel with ChangeNotifier{
     currentTab = index;
     notifyListeners();
   }
-}
-
-class NavigationObj {
-  final String label;
-  final IconData icon;
-
-  NavigationObj({required this.label, required this.icon});
 }
