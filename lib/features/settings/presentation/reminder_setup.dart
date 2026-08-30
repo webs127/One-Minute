@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/features/settings/widgets/settings_card.dart';
 import 'package:oneminute/models/settings_card.dart';
@@ -23,7 +22,6 @@ class _ReminderSetupState extends State<ReminderSetup> {
 
   @override
   Widget build(BuildContext context) {
-    String? _formattedDate;
     final theme = Theme.of(context);
     return Scaffold(
       body: CustomScrollView(
@@ -61,7 +59,6 @@ class _ReminderSetupState extends State<ReminderSetup> {
                         if (picked != null) {
                           setState(() {
                             _now = picked;
-                            _formattedDate = picked.format(context);
                           });
 
                         }
