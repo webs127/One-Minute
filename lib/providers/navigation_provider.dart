@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oneminute/features/calendar/presentation/calendar.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/settings/presentation/settings.dart';
@@ -15,7 +16,7 @@ class NavigationViewModel with ChangeNotifier{
   final List<Widget> _views = [
     HomeScreen(),
     JournalScreen(),
-    Center(child: Text("Calendar")),
+    CalendarScreen(),
     SettingsScreen(),
   ];
 

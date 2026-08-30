@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/app/router/transitions.dart';
+import 'package:oneminute/models/journal.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/home/presentation/summary.dart';
 import 'package:oneminute/features/home/presentation/writing.dart';
@@ -60,7 +61,7 @@ final router = GoRouter(
           path: RouteConstants.entryDetail,
           name: "/journal/entryDetail",
           builder: (context, state) =>
-              EntryDetailScreen(content: state.extra as String),
+              EntryDetailScreen(journal: state.extra as Journal),
         ),
       ],
       builder: (context, state) => JournalScreen(),

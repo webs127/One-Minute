@@ -1,8 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:hive_ce/hive_ce.dart';
+import 'package:intl/intl.dart';
 import 'package:oneminute/core/services/countdown_service.dart';
+import 'package:oneminute/models/journal.dart';
 
 class WritingProvider with ChangeNotifier {
-  final List<String> journals = [];
+  final Box<Journal> _box;
   final CountdownService _countdownService = CountdownService();
 
   final List<String> prompts = [
@@ -28,7 +31,7 @@ class WritingProvider with ChangeNotifier {
   Stream<TaskState>? get stream => _countdownService.stream;
   int get initialSeconds => _countdownService.initialCount;
 
-  WritingProvider() {
+  WritingProvider({required Box<Journal> box}) : _box = box {
     _currentPromptIndex = DateTime.now().millisecondsSinceEpoch % prompts.length;
   }
 
@@ -63,13 +66,31 @@ class WritingProvider with ChangeNotifier {
   start() => _countdownService.start();
   pause() => _countdownService.pause();
   resume() => _countdownService.resume();
-  dispose() => _countdownService.dispose();
+  @override
+  void dispose() {
+    _countdownService.dispose();
+    super.dispose();
+  }
 
   bool get isDone => _countdownService.isDone(); 
   
   addJournal(String value) {
-    journals.add(value);
+    final now = DateTime.now();
+    _box.add(
+      Journal(
+        content: value,
+        date: DateFormat('MMMM d, yyyy').format(now),
+        wordcount: _wordCount,
+        timestamp: now,
+      ),
+    );
     notifyListeners();
+  }
+
+  List<Journal> get journals {
+    final list = _box.values.toList()
+      ..sort((a, b) => b.timestamp.compareTo(a.timestamp));
+    return list;
   }
 
   int get journalLength => journals.length;

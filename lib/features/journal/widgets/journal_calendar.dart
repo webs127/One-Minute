@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
+import 'package:oneminute/models/journal.dart';
+import 'package:oneminute/providers/journal_provider.dart';
+import 'package:provider/provider.dart';
 
 class JournalCalendar extends StatefulWidget {
   const JournalCalendar({super.key});
@@ -95,16 +98,23 @@ class _CustomCalendarState extends State<CustomCalendar> {
   @override
   Widget build(BuildContext context) {
     final days = _getDaysInMonth();
+    final journals = context.watch<JournalProvider>().journals;
+    final entryDates = journals
+        .map((j) => DateUtils.dateOnly(j.timestamp))
+        .toSet();
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: EdgeInsets.all(widget.padding ?? 16),
-        child: Container(
-          padding: EdgeInsets.all(widget.padding ?? 16),
-          decoration: BoxDecoration(
-            color: AppColors.surfaceWhite,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.border),
-          ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(widget.padding ?? 16),
+            child: Container(
+              padding: EdgeInsets.all(widget.padding ?? 16),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceWhite,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.border),
+              ),
           child: Column(
             children: [
               Row(
@@ -168,29 +178,53 @@ class _CustomCalendarState extends State<CustomCalendar> {
                         _selectedDate = day;
                       });
                     },
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: _isSelected(day)
-                            ? AppColors.primary
-                            : _isToday(day)
-                            ? AppColors.primaryContainer
-                            : Colors.transparent,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        "${day.day}",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: _isToday(day) || _isSelected(day)
-                              ? FontWeight.w700
-                              : FontWeight.w400,
-                          color: inCurrentMonth
-                              ? (_isSelected(day)
-                                    ? AppColors.surfaceWhite
-                                    : AppColors.primaryText)
-                              : AppColors.border,
-                        ),
+                    child: SizedBox.expand(
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 30,
+                              height: 30,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: _isSelected(day)
+                                    ? AppColors.primary
+                                    : _isToday(day)
+                                    ? AppColors.primaryContainer
+                                    : Colors.transparent,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                "${day.day}",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: _isToday(day) ||
+                                          _isSelected(day)
+                                      ? FontWeight.w700
+                                      : FontWeight.w400,
+                                  color: inCurrentMonth
+                                      ? (_isSelected(day)
+                                            ? AppColors.surfaceWhite
+                                            : AppColors.primaryText)
+                                      : AppColors.border,
+                                ),
+                              ),
+                            ),
+                          ),
+                          if (entryDates.contains(DateUtils.dateOnly(day)))
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                width: 5,
+                                height: 5,
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   );
@@ -220,6 +254,61 @@ class _CustomCalendarState extends State<CustomCalendar> {
               ),
             ],
           ),
+        ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            left: widget.padding ?? 16,
+            right: widget.padding ?? 16,
+            bottom: widget.padding ?? 16,
+          ),
+          child: _buildDayPreview(journals),
+        ),
+      ],
+    ),
+  );
+}
+
+  Widget _buildDayPreview(List<Journal> journals) {
+    final theme = Theme.of(context);
+    Journal? entry;
+    for (final j in journals) {
+      if (DateUtils.isSameDay(j.timestamp, _selectedDate)) {
+        entry = j;
+        break;
+      }
+    }
+    final header = "${_monthName(_selectedDate.month)} ${_selectedDate.day} Preview"
+        .toUpperCase();
+    return Card.outlined(
+      margin: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              header,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.primary,
+              ),
+            ),
+            SizedBox(height: 10),
+            if (entry == null)
+              Text(
+                "No journal entry on this day.",
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: AppColors.secondaryText,
+                ),
+              )
+            else
+              Text(
+                entry.content,
+                style: theme.textTheme.titleMedium,
+              ),
+          ],
         ),
       ),
     );

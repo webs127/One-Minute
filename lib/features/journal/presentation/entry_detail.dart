@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
+import 'package:oneminute/models/journal.dart';
 
 class EntryDetailScreen extends StatelessWidget {
-  final String content;
-  const EntryDetailScreen({super.key, required this.content});
+  final Journal journal;
+  const EntryDetailScreen({super.key, required this.journal});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class EntryDetailScreen extends StatelessWidget {
           SliverAppBar(
             centerTitle: true,
             title: Text(
-              "August 27, 2026",
+              journal.date,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -49,7 +50,7 @@ class EntryDetailScreen extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              content,
+                              journal.content,
                               style: theme.textTheme.titleMedium,
                             ),
                           ),
@@ -91,7 +92,7 @@ class EntryDetailScreen extends StatelessWidget {
               children: [
                 Icon(MdiIcons.formatTextVariant, color: AppColors.primary),
                 Text(
-                  "67 Words",
+                  "${journal.wordcount} ${journal.wordcount == 1 ? 'Word' : 'Words'}",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

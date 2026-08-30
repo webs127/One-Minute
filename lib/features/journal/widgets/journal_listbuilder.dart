@@ -12,16 +12,16 @@ class JournalListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList.builder(
       itemCount: context.watch<JournalProvider>().journals.length,
-      itemBuilder: (context, i) => JournalTile(
-        day: "Today",
-        onTap: () {
-          context.pushNamed(
-            RouteConstants.entryDetail,
-            extra: context.read<JournalProvider>().journals[i],
-          );
-        },
-        content: context.watch<JournalProvider>().journals[i],
-      ),
+      itemBuilder: (context, i) {
+        final journal = context.read<JournalProvider>().journals[i];
+        return JournalTile(
+          day: "Today",
+          onTap: () {
+            context.pushNamed(RouteConstants.entryDetail, extra: journal);
+          },
+          content: journal.content,
+        );
+      },
     );
   }
 }
