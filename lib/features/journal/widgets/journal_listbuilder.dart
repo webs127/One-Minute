@@ -14,8 +14,13 @@ class JournalListBuilder extends StatelessWidget {
       itemCount: context.watch<JournalProvider>().journals.length,
       itemBuilder: (context, i) {
         final journal = context.read<JournalProvider>().journals[i];
+        final now = DateTime.now();
         return JournalTile(
-          day: "Today",
+          day: journal.timestamp.year == now.year &&
+                  journal.timestamp.month == now.month &&
+                  journal.timestamp.day == now.day
+              ? "Today"
+              : journal.date,
           onTap: () {
             context.pushNamed(RouteConstants.entryDetail, extra: journal);
           },

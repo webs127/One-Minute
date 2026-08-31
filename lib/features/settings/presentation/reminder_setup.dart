@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/features/settings/widgets/settings_card.dart';
 import 'package:oneminute/models/settings_card.dart';
+import 'package:oneminute/providers/reminder_provider.dart';
+import 'package:provider/provider.dart';
 
 class ReminderSetup extends StatefulWidget {
   const ReminderSetup({super.key});
@@ -18,11 +21,10 @@ class _ReminderSetupState extends State<ReminderSetup> {
     return 'Evening';
   }
 
-  TimeOfDay _now = TimeOfDay.now();
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final provider = context.watch<ReminderProvider>();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -53,14 +55,11 @@ class _ReminderSetupState extends State<ReminderSetup> {
                       onTap: () async {
                         final TimeOfDay? picked = await showTimePicker(
                           context: context,
-                          initialTime: _now,
+                          initialTime: provider.time,
                         );
 
-                        if (picked != null) {
-                          setState(() {
-                            _now = picked;
-                          });
-
+                        if (picked != null && context.mounted) {
+                          context.read<ReminderProvider>().setTime(picked);
                         }
                       },
                       borderRadius: BorderRadius.circular(12),
@@ -71,7 +70,7 @@ class _ReminderSetupState extends State<ReminderSetup> {
                             spacing: 10,
                             children: [
                               Text(
-                                _now.format(context),
+                                provider.time.format(context),
                                 style: theme.textTheme.displayMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.primary,
@@ -118,8 +117,9 @@ class _ReminderSetupState extends State<ReminderSetup> {
                         onTap: () {},
                         title: "Daily Notification",
                         suffix: Switch.adaptive(
-                          value: false,
-                          onChanged: (_) {},
+                          value: provider.isEnabled,
+                          onChanged: (v) =>
+                              context.read<ReminderProvider>().setEnabled(v),
                         ),
                       ),
                     ],
@@ -138,7 +138,7 @@ class _ReminderSetupState extends State<ReminderSetup> {
             borderRadius: BorderRadius.circular(100),
           ),
           color: AppColors.primary,
-          onPressed: () {},
+          onPressed: () => context.pop(),
           padding: EdgeInsets.all(16),
           child: Text(
             "Save Reminder",

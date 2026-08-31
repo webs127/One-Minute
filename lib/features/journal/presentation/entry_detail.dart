@@ -35,7 +35,7 @@ class EntryDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "TODAY'S MOMENT",
+                    "${journal.date} MOMENT",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,

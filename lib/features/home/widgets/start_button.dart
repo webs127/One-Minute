@@ -6,12 +6,16 @@ import 'package:oneminute/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class StartButton extends StatelessWidget {
-  const StartButton({super.key});
+  final bool enabled;
+  const StartButton({super.key, this.enabled = true});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed(RouteConstants.writing),
+      onTap: enabled
+          ? () => context.pushNamed(RouteConstants.writing)
+          : null,
+          borderRadius: BorderRadius.circular(100),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -21,7 +25,7 @@ class StartButton extends StatelessWidget {
               spreadRadius: context.watch<ThemeProvider>().isLight ? 20 : 10,
             ),
           ],
-          color: AppColors.primary,
+          color: enabled ? AppColors.primary : AppColors.border,
           borderRadius: BorderRadius.circular(100),
         ),
         padding: EdgeInsets.all(16),
@@ -29,13 +33,18 @@ class StartButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 5,
           children: [
-            Icon(Icons.play_arrow, color: AppColors.surfaceWhite),
+            Icon(
+              enabled
+                  ? Icons.play_arrow
+                  : Icons.check_circle_outline,
+              color: AppColors.secondaryText,
+            ),
             Text(
-              "Start Your Minute",
+              enabled ? "Start Your Minute" : "Come Back Tomorrow",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppColors.surfaceWhite,
+                color: AppColors.secondaryText,
               ),
             ),
           ],
