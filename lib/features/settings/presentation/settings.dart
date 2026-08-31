@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
+import 'package:oneminute/core/services/notification_service.dart';
 import 'package:oneminute/features/settings/widgets/settings_card.dart';
 import 'package:oneminute/models/settings_card.dart';
+import 'package:oneminute/providers/reminder_provider.dart';
 import 'package:oneminute/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +41,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: "Daily Reminder",
                     subtitle: "Get reminded to write your minute",
                     icon: Icons.notifications_outlined,
-                    suffix: Switch.adaptive(value: false, onChanged: (_) {}),
+                    suffix: Switch.adaptive(
+                      value: context.watch<ReminderProvider>().isEnabled,
+                      onChanged: (v) =>
+                          context.read<ReminderProvider>().setEnabled(v),
+                    ),
                   ),
                   SettingsCardObj(
                     title: "Reminder Time",
@@ -52,7 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         spacing: 5,
                         children: [
                           Text(
-                            "9:00 PM",
+                            context.watch<ReminderProvider>().time.format(context),
                             style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
@@ -77,6 +83,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsCard(
                 title: "DATA",
                 tiles: [
+                  SettingsCardObj(
+                    title: "Test Notification",
+                    subtitle: "Send a test notification",
+                    icon: Icons.notifications_active_outlined,
+                    onTap: () =>
+                        NotificationService.instance.showNow(),
+                  ),
                   SettingsCardObj(
                     title: "Export Entries",
                     subtitle: "Download all your entries",

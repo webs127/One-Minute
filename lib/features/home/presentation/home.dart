@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final hasEntry = context.watch<WritingProvider>().hasEntryToday;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 32, left: 16, right: 16),
@@ -114,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(24),
                           ),
                           child: Text(
-                            "New",
+                            hasEntry ? "Done" : "New",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
@@ -126,7 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 15),
                     Text(
-                      "You haven't captured\nyour moment today.",
+                      hasEntry
+                          ? "You've captured your moment\nfor today."
+                          : "You haven't captured\nyour moment today.",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -135,7 +138,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Take one minute of yourself.",
+                      hasEntry
+                          ? "Your next minute will be available tomorrow."
+                          : "Take one minute of yourself.",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -155,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               bottom: 0,
                               child: Align(
                                 alignment: AlignmentGeometry.bottomCenter,
-                                child: StartButton(),
+                                child: StartButton(enabled: !hasEntry),
                               ),
                             ),
                           ],

@@ -94,4 +94,15 @@ class WritingProvider with ChangeNotifier {
   }
 
   int get journalLength => journals.length;
+
+  bool get hasEntryToday {
+    final now = DateTime.now();
+    for (final j in _box.values) {
+      final t = j.timestamp;
+      if (t.year == now.year && t.month == now.month && t.day == now.day) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
