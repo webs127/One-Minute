@@ -102,6 +102,16 @@ class _CustomCalendarState extends State<CustomCalendar> {
     final entryDates = journals
         .map((j) => DateUtils.dateOnly(j.timestamp))
         .toSet();
+
+    final entriesThisMonth = journals
+        .where((j) =>
+            j.timestamp.year == _displayedMonth.year &&
+            j.timestamp.month == _displayedMonth.month)
+        .length;
+
+    final currentStreak = _calculateStreak(entryDates);
+
+        final theme = Theme.of(context);
     return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -256,6 +266,66 @@ class _CustomCalendarState extends State<CustomCalendar> {
           ),
         ),
         ),
+
+        Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          child: Row(
+            children: [
+              Expanded(
+                child: Card.outlined(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "$entriesThisMonth",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        Text(
+                          "Entries this month",
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: AppColors.secondaryText,
+                            fontWeight: FontWeight.w400
+                        ),)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Card.outlined(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "$currentStreak ${currentStreak == 1 ? 'day' : 'days'}",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      Text(
+                        "Current streak",
+                        style: theme.textTheme.titleSmall?.copyWith(
+                            color: AppColors.secondaryText,
+                            fontWeight: FontWeight.w400
+                        ),
+                      ),
+                    ],
+                  ),
+                  ),
+                ),)
+            ],
+          ),
+        ),
         Padding(
           padding: EdgeInsets.only(
             left: widget.padding ?? 16,
@@ -334,5 +404,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   String _fullDate(DateTime date) {
     return "${date.day} ${_monthName(date.month)} ${date.year}";
+  }
+
+  int _calculateStreak(Set<DateTime> entryDates) {
+    var streak = 0;
+    var day = DateTime.now();
+    while (entryDates.contains(DateUtils.dateOnly(day))) {
+      streak++;
+      day = day.subtract(const Duration(days: 1));
+    }
+    return streak;
   }
 }

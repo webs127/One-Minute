@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:oneminute/features/journal/widgets/app_tabbar.dart';
 import 'package:oneminute/features/journal/widgets/empty_journal_state.dart';
 import 'package:oneminute/features/journal/widgets/journal_calendar.dart';
@@ -23,26 +22,18 @@ class _JournalScreenState extends State<JournalScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            toolbarHeight: 140,
+            toolbarHeight: 110,
             pinned: true,
             floating: true,
             title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
+                Text(
                       "Your Journal",
                       style: theme.textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.w600
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(MdiIcons.filterOutline),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 10),
                 AppTabBar(tabs: tabs),
               ],

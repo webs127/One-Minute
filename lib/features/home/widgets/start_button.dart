@@ -37,14 +37,13 @@ class StartButton extends StatelessWidget {
               enabled
                   ? Icons.play_arrow
                   : Icons.check_circle_outline,
-              color: AppColors.secondaryText,
+              color: AppColors.surfaceBlack,
             ),
             Text(
               enabled ? "Start Your Minute" : "Come Back Tomorrow",
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppColors.secondaryText,
               ),
             ),
           ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oneminute/features/calendar/presentation/calendar.dart';
 import 'package:oneminute/features/home/presentation/home.dart';
 import 'package:oneminute/features/journal/presentation/journal.dart';
 import 'package:oneminute/features/settings/presentation/settings.dart';
@@ -9,14 +8,12 @@ class NavigationViewModel with ChangeNotifier{
   final List<NavigationObj> tabs = [
     NavigationObj(label: "Home", icon: Icons.home_outlined),
     NavigationObj(label: "Journal", icon: Icons.book_outlined),
-    NavigationObj(label: "Calendar", icon: Icons.calendar_today_outlined),
     NavigationObj(label: "Settings", icon: Icons.settings_outlined),
   ];
 
   final List<Widget> _views = [
     HomeScreen(),
     JournalScreen(),
-    CalendarScreen(),
     SettingsScreen(),
   ];
 
