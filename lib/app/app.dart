@@ -7,6 +7,7 @@ import 'package:oneminute/providers/navigation_provider.dart';
 import 'package:oneminute/providers/onboarding_provider.dart';
 import 'package:oneminute/providers/reminder_provider.dart';
 import 'package:oneminute/providers/theme_provider.dart';
+import 'package:oneminute/providers/user_provider.dart';
 import 'package:oneminute/providers/writing_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
             create: (_) => WritingProvider(box: journalsBox)),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => ReminderProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
         //Provider(create: (_) => WritingProvider()),
         ChangeNotifierProxyProvider<WritingProvider, JournalProvider>(
           create: (context) =>
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         builder: (context) {
           return MaterialApp.router(
             title: 'One Minute',
+            debugShowCheckedModeBanner: false,
             routerConfig: router,
             theme: context.watch<ThemeProvider>().theme,
             themeAnimationDuration: Durations.extralong1,

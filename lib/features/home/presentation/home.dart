@@ -4,6 +4,7 @@ import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/features/home/widgets/progress_indicator.dart';
 import 'package:oneminute/features/home/widgets/start_button.dart';
 import 'package:oneminute/providers/navigation_provider.dart';
+import 'package:oneminute/providers/user_provider.dart';
 import 'package:oneminute/providers/writing_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(onPressed: () {}, icon: Icon(MdiIcons.menu)),
+                IconButton(
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: Icon(MdiIcons.menu),
+                ),
                 IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.notifications_outlined),
@@ -74,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text("$_greeting,", style: theme.textTheme.headlineLarge),
             SizedBox(height: 5),
             Text(
-              "Divine",
+              context.watch<UserProvider>().name,
               style: theme.textTheme.headlineLarge?.copyWith(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -206,7 +210,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "0",
+                                  context
+                                      .watch<WritingProvider>()
+                                      .currentStreak
+                                      .toString(),
                                   style: theme.textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 20,

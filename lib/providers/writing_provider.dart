@@ -95,6 +95,24 @@ class WritingProvider with ChangeNotifier {
 
   int get journalLength => journals.length;
 
+  void deleteJournal(Journal journal) {
+    final keys = _box.keys.toList();
+    final values = _box.values.toList();
+    for (int i = 0; i < values.length; i++) {
+      if (identical(values[i], journal) ||
+          values[i].timestamp == journal.timestamp) {
+        _box.delete(keys[i]);
+        break;
+      }
+    }
+    notifyListeners();
+  }
+
+  void clearAll() {
+    _box.clear();
+    notifyListeners();
+  }
+
   bool get hasEntryToday {
     final now = DateTime.now();
     for (final j in _box.values) {
@@ -104,5 +122,20 @@ class WritingProvider with ChangeNotifier {
       }
     }
     return false;
+  }
+
+  bool _isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  int get currentStreak {
+    final entryDates = _box.values.map((j) => j.timestamp).toSet();
+    var streak = 0;
+    var day = DateTime.now();
+    while (entryDates.any((t) => _isSameDay(t, day))) {
+      streak++;
+      day = day.subtract(const Duration(days: 1));
+    }
+    return streak;
   }
 }

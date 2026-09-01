@@ -2,10 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/models/journal.dart';
+import 'package:oneminute/providers/theme_provider.dart';
+import 'package:oneminute/providers/writing_provider.dart';
+import 'package:provider/provider.dart';
 
 class EntryDetailScreen extends StatelessWidget {
   final Journal journal;
   const EntryDetailScreen({super.key, required this.journal});
+
+  Future<void> _confirmDelete(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: context.read<ThemeProvider>().isLight ? AppColors.background : AppColors.darkbackground,
+        title: Text("Delete entry?", style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text("This entry will be permanently deleted.", style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.w600)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text("Cancel", style: TextStyle(color: AppColors.primary)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text("Delete", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed == true && context.mounted) {
+      context.read<WritingProvider>().deleteJournal(journal);
+      Navigator.pop(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +51,7 @@ class EntryDetailScreen extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () => _confirmDelete(context),
                 icon: Icon(MdiIcons.delete, color: Colors.red),
               ),
             ],
