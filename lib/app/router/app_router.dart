@@ -60,8 +60,12 @@ final router = GoRouter(
         GoRoute(
           path: RouteConstants.entryDetail,
           name: "/journal/entryDetail",
-          builder: (context, state) =>
-              EntryDetailScreen(journal: state.extra as Journal),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            transitionsBuilder: AppTransitions.fadeIn,
+            child: EntryDetailScreen(journal: state.extra as Journal),
+          ),
+              
         ),
       ],
       builder: (context, state) => JournalScreen(),

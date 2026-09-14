@@ -30,7 +30,7 @@ class TabTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 color: selected ? AppColors.primary : AppColors.secondaryText,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

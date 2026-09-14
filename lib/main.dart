@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:oneminute/app/app.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:oneminute/core/services/notification_service.dart';
 import 'package:oneminute/hive/hive_registrar.g.dart';
 import 'package:oneminute/models/journal.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
   Hive.registerAdapters();
   final journalsBox = await Hive.openBox<Journal>('journals');
   await NotificationService.instance.init();
-  
+
   runApp(MyApp(journalsBox: journalsBox));
 }
-

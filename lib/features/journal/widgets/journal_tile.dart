@@ -44,7 +44,9 @@ class JournalTile extends StatelessWidget {
                         content,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleMedium,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
                     ],
                   ),

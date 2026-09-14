@@ -66,28 +66,32 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
+                  tooltip: "Menu",
                   onPressed: () => Scaffold.of(context).openDrawer(),
-                  icon: Icon(MdiIcons.menu),
+                  icon: Icon(MdiIcons.menu,),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.notifications_outlined),
-                ),
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(Icons.notifications_outlined),
+                // ),
               ],
             ),
-            Text("$_greeting,", style: theme.textTheme.headlineLarge),
+            Text("$_greeting,", style: theme.textTheme.headlineLarge?.copyWith(
+              fontWeight: FontWeight.w400
+            )),
             SizedBox(height: 5),
             Text(
               context.watch<UserProvider>().name,
               style: theme.textTheme.headlineLarge?.copyWith(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
+                //fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10),
             Text(
               _formattedDate,
-              style: theme.textTheme.titleMedium?.copyWith(),
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w500
+              ),
             ),
             SizedBox(height: 30),
             Card.outlined(
@@ -104,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           "TODAY'S MOMENT",
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                             color: AppColors.secondaryText,
                           ),
                         ),
@@ -122,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             hasEntry ? "Done" : "New",
                             style: TextStyle(
                               fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.surfaceBlack,
                             ),
                           ),
@@ -136,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           : "You haven't captured\nyour moment today.",
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
                         color: AppColors.surfaceBlack,
                       ),
                     ),
@@ -147,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           : "Take one minute of yourself.",
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w500,
                         color: AppColors.secondaryText,
                       ),
                     ),
@@ -181,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
               "YOUR PROGRESS",
               style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w600,
                 color: AppColors.secondaryText,
               ),
             ),
@@ -192,8 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Card.outlined(
                     elevation: .5,
                     child: InkWell(
-                      onTap: () =>
-                          context.read<NavigationViewModel>().onTabChanged(2),
+                      onTap: () => {},
                           borderRadius: BorderRadius.circular(12),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -215,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .currentStreak
                                       .toString(),
                                   style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w800,
                                     fontSize: 20,
                                   ),
                                 ),
@@ -223,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "Day Streak",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                     color: AppColors.secondaryText,
                                   ),
                                 ),
@@ -262,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .journalLength
                                       .toString(),
                                   style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w900,
+                                    fontWeight: FontWeight.w800,
                                     fontSize: 20,
                                   ),
                                 ),
@@ -270,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   "Total Entries",
                                   style: TextStyle(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                     color: AppColors.secondaryText,
                                   ),
                                 ),
@@ -284,6 +287,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            SizedBox(height: 10)
           ],
         ),
       ),
