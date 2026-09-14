@@ -28,7 +28,7 @@ class CustomListTile extends StatelessWidget {
                     Text(
                       settingsCardObj.title,
                       style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                         fontSize: 18,
                       ),
                     ),
@@ -41,7 +41,7 @@ class CustomListTile extends StatelessWidget {
                         color: settingsCardObj.color == null
                                   ? AppColors.secondaryText
                                   : settingsCardObj.color!,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w400,
                       ),
                           ),
                   ],

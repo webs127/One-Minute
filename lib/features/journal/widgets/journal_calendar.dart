@@ -282,7 +282,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           "$entriesThisMonth",
                           style: TextStyle(
                             fontSize: 24,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             color: AppColors.primary,
                           ),
                         ),
@@ -308,7 +308,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                           "$currentStreak ${currentStreak == 1 ? 'day' : 'days'}",
                         style: TextStyle(
                           fontSize: 24,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.primary,
                         ),
                       ),
@@ -376,7 +376,9 @@ class _CustomCalendarState extends State<CustomCalendar> {
             else
               Text(
                 entry.content,
-                style: theme.textTheme.titleMedium,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.normal
+                ),
               ),
           ],
         ),

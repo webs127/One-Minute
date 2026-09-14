@@ -6,10 +6,20 @@ import 'package:oneminute/providers/theme_provider.dart';
 import 'package:oneminute/providers/writing_provider.dart';
 import 'package:provider/provider.dart';
 
-class EntryDetailScreen extends StatelessWidget {
+class EntryDetailScreen extends StatefulWidget {
   final Journal journal;
   const EntryDetailScreen({super.key, required this.journal});
 
+  @override
+  State<EntryDetailScreen> createState() => _EntryDetailScreenState();
+}
+
+class _EntryDetailScreenState extends State<EntryDetailScreen> {
+  int _wordCount = 0;
+    void _updateWordCount() {
+    final trimmed = widget.journal.content;
+    _wordCount = trimmed.isEmpty ? 0 : trimmed.split(RegExp(r'\s+')).length;
+  }
   Future<void> _confirmDelete(BuildContext context) async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -30,7 +40,7 @@ class EntryDetailScreen extends StatelessWidget {
       ),
     );
     if (confirmed == true && context.mounted) {
-      context.read<WritingProvider>().deleteJournal(journal);
+      context.read<WritingProvider>().deleteJournal(widget.journal);
       Navigator.pop(context);
     }
   }
@@ -38,13 +48,14 @@ class EntryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    _updateWordCount();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             centerTitle: true,
             title: Text(
-              journal.date,
+              widget.journal.date,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -63,7 +74,7 @@ class EntryDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${journal.date} MOMENT",
+                    "${widget.journal.date} MOMENT",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -78,7 +89,7 @@ class EntryDetailScreen extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              journal.content,
+                              widget.journal.content,
                               style: theme.textTheme.titleMedium,
                             ),
                           ),
@@ -120,7 +131,7 @@ class EntryDetailScreen extends StatelessWidget {
               children: [
                 Icon(MdiIcons.formatTextVariant, color: AppColors.primary),
                 Text(
-                  "${journal.wordcount} ${journal.wordcount == 1 ? 'Word' : 'Words'}",
+                  "$_wordCount ${_wordCount == 1 ? 'Word' : 'Words'}",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

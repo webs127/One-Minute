@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             routerConfig: router,
             theme: context.watch<ThemeProvider>().theme,
-            themeAnimationDuration: Durations.extralong1,
+            themeAnimationDuration: Durations.long4,
             themeAnimationCurve: Curves.easeInOut,
           );
         }

@@ -45,8 +45,8 @@ class AppNavigationBar extends StatelessWidget {
                           state.tabs[i].label,
                           style: TextStyle(
                             fontWeight: state.currentTab == i
-                                ? FontWeight.bold
-                                : FontWeight.bold,
+                                ? FontWeight.w700
+                                : FontWeight.w500,
                             color: state.currentTab == i
                                 ? AppColors.primary
                                 : Colors.grey,
@@ -169,11 +169,6 @@ class _AppDrawer extends StatelessWidget {
             item(
               icon: Icons.star_border,
               label: "Rate the App",
-              onTap: () => Navigator.pop(context),
-            ),
-            item(
-              icon: Icons.delete_outline,
-              label: "Clear All Data",
               onTap: () => Navigator.pop(context),
             ),
           ],

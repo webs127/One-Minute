@@ -429,49 +429,6 @@ lib/
 | Flutter Local Notifications | Daily reminders                        |
 | Intl                        | Date and time formatting               |
 | Table Calendar              | Journal calendar                       |
-| Google Fonts                | Typography                             |
-| Flutter Animate             | UI animations                          |
-
----
-
-# 📦 Packages
-
-The project is expected to use packages similar to:
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-
-  flutter_riverpod:
-
-  isar:
-  isar_flutter_libs:
-  path_provider:
-
-  flutter_local_notifications:
-  timezone:
-
-  intl:
-  table_calendar:
-
-  google_fonts:
-  flutter_animate:
-```
-
-Development dependencies:
-
-```yaml
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-  build_runner:
-  isar_generator:
-```
-
-> Package versions should be selected based on the latest compatible versions when the project is set up.
-
 ---
 
 # 🎨 Design System
@@ -539,15 +496,7 @@ Recommended typography:
 | Labels         | Medium            |
 | Timer          | Medium            |
 
-Example:
 
-```dart
-ThemeData(
-  textTheme: GoogleFonts.dmSansTextTheme(),
-)
-```
-
----
 
 # 🗄️ Data Model
 
@@ -750,16 +699,17 @@ Important areas to test include:
 * [x] Build writing experience
 * [x] Implement 60-second timer
 * [x] Implement automatic saving
-* [ ] Implement local database
-* [ ] Implement journal history
-* [ ] Implement calendar
-* [ ] Implement streak calculation
-* [ ] Implement notifications
-* [ ] Implement settings
-* [ ] Add dark mode
-* [ ] Test the application
-* [ ] Prepare screenshots
-* [ ] Write project documentation
+* [x] Implement local database
+* [x] Implement journal history
+* [x] Implement calendar
+* [x] Implement streak calculation
+* [x] Implement notifications
+* [x] Implement settings
+* [x] Add dark mode
+* [x] Test the application
+* [x] Prepare screenshots
+* [x] Write project documentation
+* [x] Export journal entries as Text
 
 ---
 

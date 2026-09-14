@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:oneminute/app/router/route_constants.dart';
 import 'package:oneminute/app/theme/app_colors.dart';
 import 'package:oneminute/core/services/export_service.dart';
-import 'package:oneminute/core/services/notification_service.dart';
 import 'package:oneminute/features/settings/widgets/settings_card.dart';
 import 'package:oneminute/models/settings_card.dart';
 import 'package:oneminute/providers/reminder_provider.dart';
@@ -43,13 +42,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: Text(
           "Clear all data?",
           style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w700,
             fontSize: 24,
           ),
         ),
         content: Text(
           "All journal entries will be permanently deleted. This cannot be undone.",
-          style: theme.textTheme.titleSmall,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w500
+          ),
         ),
         actions: [
           TextButton(
@@ -205,6 +206,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),

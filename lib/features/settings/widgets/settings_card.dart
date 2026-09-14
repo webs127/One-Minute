@@ -16,7 +16,7 @@ class SettingsCard extends StatelessWidget {
         title == null ? SizedBox() : Text(
           title!,
           style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w800,
           ),
         ),
         SizedBox(height: 5),
