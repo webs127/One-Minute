@@ -745,6 +745,22 @@ If you would like to contribute:
 
 ---
 
+# Release setup
+
+Android release builds use a private signing keystore rather than the debug key.
+Before creating a release artifact:
+
+1. Create or obtain your production/upload keystore and keep it outside version control.
+2. Copy `android/key.properties.example` to `android/key.properties`.
+3. Replace the placeholders with the keystore credentials and path. The `storeFile` path is relative to the `android` directory unless you provide an absolute path.
+4. Replace the default `com.example.oneminute` Android application ID and iOS bundle identifier with your own unique publisher identifiers before publishing.
+5. Set the production version in `pubspec.yaml` using `version: major.minor.patch+build`.
+
+The signing properties and keystore extensions are ignored by Git. Back up the keystore and passwords securely; losing them prevents updates to an already published Android app.
+
+---
+
+
 # 📄 License
 
 This project is currently intended as a personal portfolio project.
